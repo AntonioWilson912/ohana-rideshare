@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ohana Rideshares</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+</head>
+<body>
+    <div class="container-fluid p-5">
+        <div class="container-fluid d-flex">
+            <h1>Request a Ride</h1>
+            <div class="container d-flex justify-content-end">
+                <a href="/rides/dashboard" class="mr-5">Home</a>
+                <a href="/logout">Log Out</a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <form action="/rides/add_request" method="post">
+            <div class="container p-5">
+                {% with messages = get_flashed_messages(category_filter=["request"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <div class="form-group">
+                    <label for="destination" class="form-label">Destination:</label>
+                    <input type="text" class="form-control" name="destination">
+                </div>
+                <div class="form-group">
+                    <label for="pickup_location" class="form-label">Pickup Location:</label>
+                    <input type="text" class="form-control" name="pickup_location">
+                </div>
+                <div class="form-group">
+                    <label for="date_needed" class="form-label">Rideshare Date:</label>
+                    <input type="date" name="date_needed" id="date_needed">
+                </div>
+                <div class="form-group">
+                    <label for="details" class="form-label">Details:</label>
+                    <textarea name="details" id="details" cols="30" rows="10" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="container text-right">
+                <input class="btn btn-primary" type="submit" value="Post">
+            </div>
+        </form>
+    </div>
+</body>
+</html>

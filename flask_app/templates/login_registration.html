@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ohana Rideshares</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row border-bottom border-dark m-4 d-flex justify-content-center">
+            <h3 class="text-center">Ohana Rideshares</h3>
+        </div>
+        <div class="row justify-content-around">
+            <div class="col-4 text-warning bg-dark p-4">
+                <h1>Register</h1>
+                {% with messages = get_flashed_messages(category_filter=["register"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <form action="/register" method="post">
+                    <div class="form-group">
+                        <label for="first_name" class="form-label">First Name:</label>
+                        <input type="text" name="first_name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="last_name" class="form-label">Last Name:</label>
+                        <input type="text" name="last_name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password" class="form-label">Confirm Password:</label>
+                        <input type="password" name="confirm_password" class="form-control">
+                    </div>
+                    <input type="submit" class="btn btn-warning" value="Register">
+                </form>
+            </div>
+            <div class="col-4 text-success bg-dark p-4">
+                <h1>Log In</h1>
+                {% with messages = get_flashed_messages(category_filter=["login"]) %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="text-danger">{{ message }}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <form action="/login" method="post">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password:</label>
+                        <input type="password" name="password" class="form-control">
+                    </div>
+                    <input type="submit" class="btn btn-success" value="Login">
+                </form>
+            </div>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ohana Rideshares</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+</head>
+<body>
+    <div class="container-fluid p-5">
+        <div class="container-fluid d-flex justify-content-end mb-3">
+            <a href="/rides/dashboard" class="mr-5">Home</a>
+            <a href="/logout">Log Out</a>
+        </div>
+        <div class="container-fluid border border-dark">
+            <h1>Ready for your trip to {{ this_ride.destination }}?</h1>
+            <div class="row">
+                <div class="col-4">
+                    <p>Who's driving?</p>
+                </div>
+                <div class="col-8">
+                    <p>
+                    {% if this_ride.driver.id == this_user.id %}
+                        You
+                    {% else %}
+                        {{ this_ride.driver.first_name }}
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <p>Who's coming along?</p>
+                </div>
+                <div class="col-8">
+                    <p>
+                    {% if this_ride.rider.id == this_user.id %}
+                        You
+                    {% else %}
+                        {{ this_ride.rider.first_name }}
+                    {% endif %}
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <p>Date:</p>
+                </div>
+                <div class="col-8">
+                    <p>{{ this_ride.date_needed|strftime("%B %d") }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <p>Pick-up Location:</p>
+                </div>
+                <div class="col-8">
+                    <p>{{ this_ride.pickup_location }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <p>Details:</p>
+                </div>
+                <div class="col-8">
+                    <p>{{ this_ride.details }}</p>
+                </div>
+            </div>
+            <p><a href="/rides/edit/{{ this_ride.id }}">Edit</a> | <a href="/rides/delete_booked_ride/{{ this_ride.id }}">DELETE</a></p>
+        </div>
+    </div>
+</body>
+</html>
